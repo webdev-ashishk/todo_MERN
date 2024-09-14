@@ -24,7 +24,7 @@ app.post('/api/v1/createtodo', async (req, res) => {
   console.log(result);
   res.json('successfully created todo in database');
 });
-app.get('/alltodos', async (req, res) => {
+app.get('/todos', async (req, res) => {
   const result = await TodoModel.find({});
   res.json(result);
 });

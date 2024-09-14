@@ -1,29 +1,39 @@
 import { useState } from 'react';
-
+import axios from 'axios';
 const TodoComponent = () => {
   const [Title, setTitle] = useState('');
   const [Description, setDescription] = useState('');
   const [PhoneNumber, setPhoneNumber] = useState('');
   const handleAddTodo = async () => {
     console.log('add todo');
-    // const todoData = {
-    //   title: { title },
-    //   description: { description },
-    //   phoneNumber: { phoneNumber },
-    // };
     const todoData = {
       title: Title,
       description: Description,
       phoneNumber: PhoneNumber,
     };
-    fetch('http://localhost:3000/api/v1/createtodo', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(todoData),
-    }).catch((err) => console.log(err));
+    // fetch('http://localhost:3000/api/v1/createtodo', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(todoData),
+    // }).catch((err) => console.log(err));
+    try {
+      const response = await axios.post(
+        'http://localhost:3000/api/v1/createtodo',
+        todoData
+      );
+      console.log(
+        'response data==>',
+        response.data,
+        +'response status',
+        response.status
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   return (
     <div>
       <h1>Todo components...</h1>
